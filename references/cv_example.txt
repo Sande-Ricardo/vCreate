@@ -1,0 +1,97 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{multicol}
+\titlespacing*{\subsection}
+{0pt}{4pt}{2pt}
+\titleformat{\section}{\Large\bfseries\color{black}}{}{0em}{}
+\titleformat{\subsection}[runin]{\bfseries}{}{0pt}{}[ -- ]
+\pagestyle{empty}
+\begin{document}
+\begin{center}
+    {\Huge \textbf{Ricardo Sande}} \\
+    \vspace{2mm}
+    \textbf{Ingeniero de IA - Desarrollador Web Full Stack} \\
+    \vspace{1mm}
+    \href{mailto:ricardosande101@gmail.com}{ricardosande101@gmail.com} \quad | \quad +54 911 5831 5733 \\
+   \href{https://www.linkedin.com/in/sande-ricardo}{linkedin.com/in/sande-ricardo}  
+\quad | \quad \href{https://github.com/Sande-Ricardo/}{github.com/Sande-Ricardo}
+\\
+Buenos Aires, Argentina 
+\end{center}
+\vspace{5mm}
+\section*{Perfil Profesional}
+Desarrollador Full Stack e Ingeniero de IA con 2 años de experiencia en la construcción de aplicaciones web completas e inteligentes, desde el diseño UI/UX hasta el despliegue en producción. Sólidos fundamentos en código limpio, principios SOLID y metodologías ágiles. Actualmente especializado en Ingeniería de IA, con proyectos en producción que implementan LLMs, pipelines RAG y agentes conversacionales. Me destaco por una curva de aprendizaje acelerada, un perfil versátil que abarca todo el ciclo de desarrollo y un compromiso activo con las tendencias más demandadas de la industria.
+\section*{Experiencia Laboral}
+\subsection{Ingeniero de IA}
+Marzo 2026 -- Presente
+\begin{itemize}
+    \item Diseño e implementación de pipelines RAG para recuperación de documentos y generación de respuestas.
+    \item Integración de LLMs y modelos de embeddings mediante APIs externas de IA.
+    \item Diseño de esquemas de bases de datos vectoriales y optimización de búsqueda semántica.
+    \item Desarrollo de APIs RESTful potenciadas por IA con soporte de respuestas en streaming.
+    \item Diseño de estrategias de chunking y calibración de parámetros de recuperación para sistemas de bases de conocimiento.
+\end{itemize}
+\textbf{Stack:} FastAPI, LangChain, Next.js
+\vspace{4mm}
+\subsection{Desarrollador Web Full Stack Freelance}
+Marzo 2024 -- Presente
+\begin{itemize}
+    \item Diseño y desarrollo de sitios web y plataformas web.
+    \item Maquetación e implementación de interfaces front-end.
+    \item Optimización del rendimiento web.
+    \item Consideraciones de seguridad en aplicaciones.
+    \item Integración de APIs de terceros.
+\end{itemize}
+\textbf{Stack:} Angular, Spring Boot, MySQL
+\section*{Educación}
+\subsection{Ingeniería en Informática}
+2022 -- Presente \\
+Universidad Nacional Arturo Jauretche 
+\vspace{2mm}
+\subsection{Desarrollo Full Stack}
+2023 -- Presente \\
+Autodidacta
+\vspace{2mm}
+\subsection{Ingeniería de IA}
+2025 -- Presente \\
+Autodidacta
+\section*{Habilidades Técnicas}
+\subsection{Frontend}
+Angular, Next.js, React, TailwindCSS, Typescript, Javascript, HTML5, CSS3
+\subsection{Backend}
+Spring Boot, Java, JWT, OAuth 2.0, Ruby, Python, Flask, FastAPI.
+\subsection{Bases de Datos}
+MySQL.
+\subsection{DevOps y Herramientas}
+Git, Netlify, Clever Cloud, Render, Firebase Suite, Supabase, Docker
+\subsection{Diseño UI/UX}
+Figma, Miro, Stitch, Pencil, Inkscape, VTracer CLI, Adobe Illustrator
+\subsection{Metodologías}
+Scrum, Kanban, Código Limpio, Principios SOLID, Desarrollo Basado en Componentes, POO, PFR
+\vspace{4mm}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \section*{Habilidades Blandas}
+    \begin{itemize}[leftmargin=1.5em]
+        \item Proactivo y automotivado
+        \item Aprendizaje rápido y continuo
+        \item Fuerte capacidad de organización y planificación
+        \item Mentalidad de mejora continua
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \section*{Idiomas}
+    \begin{itemize}[leftmargin=1.5em]
+        \item Español: Nativo
+        \item Inglés: Intermedio (B1)
+    \end{itemize}
+\end{minipage}
+\end{document}

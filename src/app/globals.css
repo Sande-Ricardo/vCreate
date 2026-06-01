@@ -1,0 +1,248 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   vCreate — "Luminous Professional" Design System
+   Tailwind v4 CSS-first configuration via @theme
+   All tokens derived from references/DESIGN.md
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS (@theme)
+   -------------------------------------------------------------------------- */
+@theme {
+  /* --- Color Palette (Luminous Professional) --- */
+
+  /* Surfaces */
+  --color-surface: #131313;
+  --color-surface-dim: #131313;
+  --color-surface-bright: #393939;
+  --color-surface-lowest: #0e0e0e;
+  --color-surface-low: #1b1b1b;
+  --color-surface-container: #1f1f1f;
+  --color-surface-high: #2a2a2a;
+  --color-surface-highest: #353535;
+  --color-surface-variant: #353535;
+  --color-surface-tint: #c6c6c7;
+
+  /* On-surface */
+  --color-on-surface: #e2e2e2;
+  --color-on-surface-variant: #c4c7c8;
+  --color-inverse-surface: #e2e2e2;
+  --color-inverse-on-surface: #303030;
+
+  /* Outlines */
+  --color-outline: #8e9192;
+  --color-outline-variant: #444748;
+
+  /* Primary */
+  --color-primary: #ffffff;
+  --color-on-primary: #2f3131;
+  --color-primary-container: #e2e2e2;
+  --color-on-primary-container: #636565;
+  --color-inverse-primary: #5d5f5f;
+
+  /* Secondary */
+  --color-secondary: #c6c6c6;
+  --color-on-secondary: #2f3131;
+  --color-secondary-container: #454747;
+  --color-on-secondary-container: #b5b5b5;
+
+  /* Tertiary */
+  --color-tertiary: #ffffff;
+  --color-on-tertiary: #26313f;
+  --color-tertiary-container: #d7e3f5;
+  --color-on-tertiary-container: #596575;
+
+  /* Error */
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  /* Background — vertical gradient defined in utility below */
+  --color-background: #000814;
+  --color-on-background: #e2e2e2;
+
+  /* Design Accent Aliases */
+  --color-void: #000000;
+  --color-midnight: #000814;
+  --color-brilliant-white: #ffffff;
+  --color-glowing-silver: #e5e5e5;
+
+  /* --- Spacing Unit: 8px base --- */
+  --spacing-unit: 8px;
+
+  /* --- Border Radius: Sharp (0) — no roundedness by default --- */
+  --radius-none: 0px;
+  --radius-full: 9999px; /* Exception: circular icon buttons only */
+
+  /* --- Custom Shadows / Glow Effects --- */
+  --shadow-glow-sm: 0 0 8px rgba(255, 255, 255, 0.2);
+  --shadow-glow-md: 0 0 15px rgba(255, 255, 255, 0.3);
+  --shadow-glow-lg: 0 0 25px rgba(255, 255, 255, 0.4);
+  --shadow-glow-input: 0 0 0 1px rgba(255, 255, 255, 0.8), 0 0 8px rgba(255, 255, 255, 0.15);
+
+  /* --- Breakpoints (matching DESIGN.md) --- */
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1200px;
+}
+
+/* --------------------------------------------------------------------------
+   3. GLOBAL BASE STYLES
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-radius: 0; /* Sharp — no roundedness globally */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Midnight Blue → Deep Black vertical gradient */
+  background: linear-gradient(180deg, #000814 0%, #000000 100%);
+  background-attachment: fixed;
+  color: var(--color-on-surface);
+  /* Inter is injected via next/font — inherit from <html> className */
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   4. TYPOGRAPHY UTILITIES
+   -------------------------------------------------------------------------- */
+@utility type-display-lg {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 80px;
+  letter-spacing: -0.04em;
+}
+
+@utility type-headline-lg {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+}
+
+@utility type-headline-lg-mobile {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+}
+
+@utility type-title-md {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+@utility type-body-lg {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+@utility type-body-md {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@utility type-label-caps {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   5. SURFACE / ELEVATION UTILITIES
+   -------------------------------------------------------------------------- */
+
+/* Glassmorphic container — "Transparency Cut" */
+@utility surface-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 229, 229, 0.2);
+  /* inner highlight via box-shadow */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Solid elevated surface */
+@utility surface-elevated {
+  background-color: var(--color-surface-high);
+  border: 1px solid rgba(229, 229, 229, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   6. GLOW UTILITIES
+   -------------------------------------------------------------------------- */
+@utility glow-sm {
+  box-shadow: var(--shadow-glow-sm);
+}
+
+@utility glow-md {
+  box-shadow: var(--shadow-glow-md);
+}
+
+@utility glow-lg {
+  box-shadow: var(--shadow-glow-lg);
+}
+
+/* --------------------------------------------------------------------------
+   7. SEPARATOR UTILITY — Glowing Separator
+   -------------------------------------------------------------------------- */
+@utility separator-glow {
+  height: 1px;
+  border: none;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   8. SCROLLBAR STYLING
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(229, 229, 229, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(229, 229, 229, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   9. SELECTION STYLING
+   -------------------------------------------------------------------------- */
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   10. FOCUS VISIBLE — accessibility default
+   -------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+}

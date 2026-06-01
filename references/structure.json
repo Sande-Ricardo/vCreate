@@ -1,0 +1,72 @@
+{
+  "personal_data": {
+    "full_name": "string",
+    "primary_title": "string",
+    "secondary_title": "string",
+    "email": "string",
+    "phone": "string",
+    "location": "string",
+    "links": [
+      {
+        "platform": "string",
+        "url": "string"
+      }
+    ]
+  },
+  "professional_profile": "string",
+  "work_experience": [
+    {
+      "role": "string",
+      "company_or_context": "string",
+      "start_date": "string",
+      "end_date": "string",
+      "is_current": true,
+      "responsibilities": ["string"],
+      "stack": ["string"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "string",
+      "short_description": "string",
+      "responsibilities": ["string"],
+      "technologies": ["string"],
+      "repository_url": "string",
+      "live_demo_url": "string"
+    }
+  ],
+  "education": [
+    {
+      "degree": "string",
+      "institution": "string",
+      "start_date": "string",
+      "end_date": "string",
+      "is_current": true
+    }
+  ],
+  "certifications": [
+    {
+      "name": "string",
+      "issuer": "string",
+      "date": "string",
+      "url": "string"
+    }
+  ],
+  "technical_skills": [
+    {
+      "category": "string",
+      "skills": ["string"]
+    }
+  ],
+  "soft_skills": ["string"],
+  "languages": [
+    {
+      "language": "string",
+      "proficiency": "string"
+    }
+  ],
+  "metadata": {
+    "last_updated": "string",
+    "language_version": "string"
+  }
+}
