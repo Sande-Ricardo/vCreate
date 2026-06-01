@@ -50,6 +50,13 @@ export const i18n = {
     degree: 'Degree / Certificate',
     institution: 'Institution',
     isCurrentEdu: 'I currently study here',
+    certName: 'Certification Name',
+    issuer: 'Issuer',
+    date: 'Date',
+    certUrl: 'Certification URL',
+    category: 'Category (e.g. Frontend)',
+    languageName: 'Language',
+    proficiency: 'Proficiency (e.g. Native, C1)',
   },
   es: {
     // General
@@ -100,5 +107,12 @@ export const i18n = {
     degree: 'Título / Certificado',
     institution: 'Institución',
     isCurrentEdu: 'Estudio aquí actualmente',
+    certName: 'Nombre de Certificación',
+    issuer: 'Emisor',
+    date: 'Fecha',
+    certUrl: 'URL de la Certificación',
+    category: 'Categoría (ej. Frontend)',
+    languageName: 'Idioma',
+    proficiency: 'Nivel (ej. Nativo, C1)',
   },
 };

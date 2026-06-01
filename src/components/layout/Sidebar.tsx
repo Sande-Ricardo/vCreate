@@ -21,7 +21,7 @@ export function Sidebar() {
   const labels = i18n[lang];
 
   return (
-    <aside className="w-full lg:w-56 border-r border-[rgba(229,229,229,0.1)] p-6 bg-[rgba(255,255,255,0.01)] backdrop-blur-md overflow-y-auto">
+    <aside className="w-full lg:w-56 shrink-0 border-r border-[rgba(229,229,229,0.1)] p-6 bg-[rgba(255,255,255,0.01)] backdrop-blur-md overflow-y-auto">
       <h2 className="type-title-md mb-6">{labels.navigation}</h2>
       <nav className="flex flex-col gap-2">
         {SECTIONS.map((section) => {
