@@ -21,6 +21,8 @@ export interface CvState {
   isInitialized: boolean;
   /** Currently active form section in the UI. */
   activeSection: 'personal_data' | 'work_experience' | 'projects' | 'education' | 'certifications' | 'technical_skills' | 'soft_skills_languages';
+  /** Global notification state */
+  notification: { message: string; type: 'error' | 'success' | 'info' } | null;
 }
 
 export interface CvActions {
@@ -29,6 +31,7 @@ export interface CvActions {
   resetStore: () => void;
   setInputLanguage: (lang: 'es' | 'en') => void;
   setActiveSection: (section: CvState['activeSection']) => void;
+  setNotification: (notification: { message: string; type: 'error' | 'success' | 'info' } | null) => void;
 
   // Personal Data
   updatePersonalData: (data: Partial<PersonalData>) => void;
@@ -38,16 +41,19 @@ export interface CvActions {
   addWorkExperience: (item: WorkExperience) => void;
   updateWorkExperience: (index: number, item: Partial<WorkExperience>) => void;
   removeWorkExperience: (index: number) => void;
+  reorderWorkExperience: (fromIndex: number, toIndex: number) => void;
 
   // Projects
   addProject: (item: Project) => void;
   updateProject: (index: number, item: Partial<Project>) => void;
   removeProject: (index: number) => void;
+  reorderProject: (fromIndex: number, toIndex: number) => void;
 
   // Education
   addEducation: (item: Education) => void;
   updateEducation: (index: number, item: Partial<Education>) => void;
   removeEducation: (index: number) => void;
+  reorderEducation: (fromIndex: number, toIndex: number) => void;
 
   // Certifications
   addCertification: (item: Certification) => void;
@@ -77,6 +83,7 @@ export const useCvStore = create<CvStore>()(
       isDirty: false,
       isInitialized: false,
       activeSection: 'personal_data',
+      notification: null,
 
       // Global
       loadFromJson: (jsonStr) => {
@@ -87,11 +94,25 @@ export const useCvStore = create<CvStore>()(
             state.data = parsed;
             state.isDirty = false;
             state.isInitialized = true;
+            state.notification = {
+              message: 'CV draft loaded successfully.',
+              type: 'success',
+            };
           });
         } catch (e) {
           console.error('Failed to parse CV JSON', e);
+          set((state) => {
+            state.notification = {
+              message: e instanceof Error ? `Failed to parse CV JSON: ${e.message}` : 'Failed to parse CV JSON',
+              type: 'error',
+            };
+          });
         }
       },
+      setNotification: (notification) =>
+        set((state) => {
+          state.notification = notification;
+        }),
       resetStore: () =>
         set((state) => {
           state.data = createEmptyCvData('en');
@@ -137,6 +158,14 @@ export const useCvStore = create<CvStore>()(
           state.data.work_experience.splice(idx, 1);
           state.isDirty = true;
         }),
+      reorderWorkExperience: (from, to) =>
+        set((state) => {
+          const [removed] = state.data.work_experience.splice(from, 1);
+          if (removed) {
+            state.data.work_experience.splice(to, 0, removed);
+            state.isDirty = true;
+          }
+        }),
 
       // Projects
       addProject: (item) =>
@@ -154,6 +183,14 @@ export const useCvStore = create<CvStore>()(
           state.data.projects.splice(idx, 1);
           state.isDirty = true;
         }),
+      reorderProject: (from, to) =>
+        set((state) => {
+          const [removed] = state.data.projects.splice(from, 1);
+          if (removed) {
+            state.data.projects.splice(to, 0, removed);
+            state.isDirty = true;
+          }
+        }),
 
       // Education
       addEducation: (item) =>
@@ -170,6 +207,14 @@ export const useCvStore = create<CvStore>()(
         set((state) => {
           state.data.education.splice(idx, 1);
           state.isDirty = true;
+        }),
+      reorderEducation: (from, to) =>
+        set((state) => {
+          const [removed] = state.data.education.splice(from, 1);
+          if (removed) {
+            state.data.education.splice(to, 0, removed);
+            state.isDirty = true;
+          }
         }),
 
       // Certifications

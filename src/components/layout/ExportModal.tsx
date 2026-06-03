@@ -10,7 +10,7 @@ interface ExportModalProps {
 }
 
 export function ExportModal({ isOpen, onClose }: ExportModalProps) {
-  const { data } = useCvStore();
+  const { data, setNotification } = useCvStore();
   const [format, setFormat] = useState<'pdf_only' | 'zip_single_language_json' | 'zip_all_languages' | 'zip_all_languages_json'>('pdf_only');
   const [apiKey, setApiKey] = useState('');
   const [isExporting, setIsExporting] = useState(false);
@@ -70,9 +70,17 @@ export function ExportModal({ isOpen, onClose }: ExportModalProps) {
       a.download = filename;
       a.click();
       URL.revokeObjectURL(url);
+      setNotification({
+        message: 'CV exported successfully.',
+        type: 'success',
+      });
       onClose();
     } catch (e: any) {
       setError(e.message);
+      setNotification({
+        message: e.message,
+        type: 'error',
+      });
     } finally {
       setIsExporting(false);
     }

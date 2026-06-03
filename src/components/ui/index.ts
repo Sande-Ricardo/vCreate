@@ -26,3 +26,6 @@ export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
 
 export { ArrayInput } from './ArrayInput';
+
+export { Notification } from './Notification';
+

@@ -3,6 +3,7 @@ import path from 'path';
 import Handlebars from 'handlebars';
 import { CvData } from '@/types/cv.types';
 import { sanitizeLatex } from './sanitize';
+import { latexLabels } from './labels';
 
 // Helper for deep cloning and sanitizing
 function sanitizeData(data: any): any {
@@ -33,7 +34,10 @@ export async function generateLatexString(data: CvData): Promise<string> {
   
   // Compile and run Handlebars
   const template = Handlebars.compile(templateString, { noEscape: true }); // noEscape is important! We already escaped for LaTeX.
-  return template(sanitizedData);
+  
+  const lang = sanitizedData.metadata?.language_version === 'en' ? 'en' : 'es';
+  
+  return template({ ...sanitizedData, i18n: latexLabels[lang] });
 }
 
 export async function compilePdf(texString: string): Promise<Buffer> {

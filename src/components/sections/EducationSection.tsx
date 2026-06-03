@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useCvStore } from '@/store/cv.store';
 import { i18n } from '@/lib/i18n';
 import { Input, Card, Button, Checkbox } from '@/components/ui';
@@ -12,26 +13,27 @@ function IconTrash() {
   );
 }
 
-function IconChevronUp() {
+function IconGrip() {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M4 10l4-4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
-    </svg>
-  );
-}
-
-function IconChevronDown() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
+    <svg className="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="9" cy="5" r="1" />
+      <circle cx="9" cy="12" r="1" />
+      <circle cx="9" cy="19" r="1" />
+      <circle cx="15" cy="5" r="1" />
+      <circle cx="15" cy="12" r="1" />
+      <circle cx="15" cy="19" r="1" />
     </svg>
   );
 }
 
 export function EducationSection() {
-  const { data, addEducation, updateEducation, removeEducation } = useCvStore();
+  const { data, addEducation, updateEducation, removeEducation, reorderEducation } = useCvStore();
   const lang = data.metadata.language_version;
   const labels = i18n[lang];
+
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+  const [dragAllowed, setDragAllowed] = useState(false);
 
   const handleAdd = () => {
     addEducation({
@@ -41,18 +43,6 @@ export function EducationSection() {
       end_date: '',
       is_current: false
     });
-  };
-
-  const moveItem = (index: number, direction: 'up' | 'down') => {
-    if (direction === 'up' && index === 0) return;
-    if (direction === 'down' && index === data.education.length - 1) return;
-    
-    const arr = [...data.education];
-    const targetIdx = direction === 'up' ? index - 1 : index + 1;
-    
-    const temp = arr[index];
-    updateEducation(index, arr[targetIdx]);
-    updateEducation(targetIdx, temp);
   };
 
   return (
@@ -66,25 +56,52 @@ export function EducationSection() {
 
       <div className="space-y-6">
         {data.education.map((edu, index) => (
-          <Card key={index} className="relative group">
+          <Card 
+            key={index} 
+            className={[
+              'relative group transition-all duration-200',
+              draggedIndex === index ? 'opacity-40 scale-[0.98]' : '',
+              dragOverIndex === index ? 'border-white bg-[rgba(255,255,255,0.06)] shadow-[0_0_10px_rgba(255,255,255,0.1)]' : '',
+            ].join(' ')}
+            draggable={dragAllowed}
+            onDragStart={(e) => {
+              setDraggedIndex(index);
+              e.dataTransfer.effectAllowed = 'move';
+            }}
+            onDragOver={(e) => {
+              e.preventDefault();
+              if (draggedIndex !== null && draggedIndex !== index) {
+                setDragOverIndex(index);
+              }
+            }}
+            onDragLeave={() => {
+              setDragOverIndex(null);
+            }}
+            onDragEnd={() => {
+              setDraggedIndex(null);
+              setDragOverIndex(null);
+              setDragAllowed(false);
+            }}
+            onDrop={(e) => {
+              e.preventDefault();
+              if (draggedIndex !== null && draggedIndex !== index) {
+                reorderEducation(draggedIndex, index);
+              }
+              setDraggedIndex(null);
+              setDragOverIndex(null);
+              setDragAllowed(false);
+            }}
+          >
             {/* Actions Bar */}
             <div className="absolute top-4 right-4 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button 
-                onClick={() => moveItem(index, 'up')} 
-                disabled={index === 0}
-                className="p-1.5 text-[var(--color-outline)] hover:text-white disabled:opacity-30 transition-colors"
-                title="Move Up"
+              <span
+                onMouseDown={() => setDragAllowed(true)}
+                onMouseUp={() => setDragAllowed(false)}
+                className="cursor-grab active:cursor-grabbing p-1.5 text-[var(--color-outline)] hover:text-white transition-colors"
+                title="Drag to Reorder"
               >
-                <IconChevronUp />
-              </button>
-              <button 
-                onClick={() => moveItem(index, 'down')} 
-                disabled={index === data.education.length - 1}
-                className="p-1.5 text-[var(--color-outline)] hover:text-white disabled:opacity-30 transition-colors"
-                title="Move Down"
-              >
-                <IconChevronDown />
-              </button>
+                <IconGrip />
+              </span>
               <div className="w-px h-4 bg-[rgba(229,229,229,0.2)] mx-1" />
               <button 
                 onClick={() => removeEducation(index)}

@@ -52,6 +52,8 @@ export async function translateCvData(cvData: CvData, options: TranslateOptions)
   // Extract from Work Experience
   translatedData.work_experience.forEach((exp) => {
     registerString(exp, 'role');
+    registerString(exp, 'start_date');
+    registerString(exp, 'end_date');
     exp.responsibilities.forEach((_, i) => registerString(exp.responsibilities, i));
   });
 
@@ -64,11 +66,14 @@ export async function translateCvData(cvData: CvData, options: TranslateOptions)
   // Extract from Education
   translatedData.education.forEach((edu) => {
     registerString(edu, 'degree');
+    registerString(edu, 'start_date');
+    registerString(edu, 'end_date');
   });
 
   // Extract from Certifications
   translatedData.certifications.forEach((cert) => {
     registerString(cert, 'name');
+    registerString(cert, 'date');
   });
 
   // Extract from Technical Skills (Categories only)

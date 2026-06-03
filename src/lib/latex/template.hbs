@@ -36,32 +36,32 @@
 \vspace{5mm}
 
 {{#if professional_profile}}
-\section*{Perfil Profesional}
+\section*{ {{{i18n.professionalProfile}}} }
 {{{professional_profile}}}
 {{/if}}
 
 {{#if work_experience.length}}
-\section*{Experiencia Laboral}
+\section*{ {{{i18n.workExperience}}} }
 {{#each work_experience}}
 \subsection{ {{{role}}} }
-{{{start_date}}} -- {{#if is_current}}Presente{{else}}{{{end_date}}}{{/if}}
+{{{start_date}}} -- {{#if is_current}}{{{i18n.present}}}{{else}}{{{end_date}}}{{/if}}
 \begin{itemize}
     {{#each responsibilities}}
     \item {{{this}}}
     {{/each}}
 \end{itemize}
 {{#if stack.length}}
-\textbf{Stack:} {{#each stack}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}
+\textbf{ {{{i18n.stack}}}:} {{#each stack}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}
 {{/if}}
 \vspace{4mm}
 {{/each}}
 {{/if}}
 
 {{#if projects.length}}
-\section*{Proyectos}
+\section*{ {{{i18n.projects}}} }
 {{#each projects}}
 \subsection{ {{{name}}} }
-{{#if repository_url}} \href{ {{{repository_url}}} }{Repo} {{/if}} {{#if live_demo_url}} | \href{ {{{live_demo_url}}} }{Demo} {{/if}}
+{{#if repository_url}} \href{ {{{repository_url}}} }{ {{{i18n.repo}}} } {{/if}} {{#if live_demo_url}} | \href{ {{{live_demo_url}}} }{ {{{i18n.demo}}} } {{/if}}
 \begin{itemize}
     {{#if short_description}} \item {{{short_description}}} {{/if}}
     {{#each responsibilities}}
@@ -69,24 +69,24 @@
     {{/each}}
 \end{itemize}
 {{#if technologies.length}}
-\textbf{Tecnologías:} {{#each technologies}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}
+\textbf{ {{{i18n.technologies}}}:} {{#each technologies}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}
 {{/if}}
 \vspace{4mm}
 {{/each}}
 {{/if}}
 
 {{#if education.length}}
-\section*{Educación}
+\section*{ {{{i18n.education}}} }
 {{#each education}}
 \subsection{ {{{degree}}} }
-{{{start_date}}} -- {{#if is_current}}Presente{{else}}{{{end_date}}}{{/if}} \\
+{{{start_date}}} -- {{#if is_current}}{{{i18n.present}}}{{else}}{{{end_date}}}{{/if}} \\
 {{{institution}}}
 \vspace{2mm}
 {{/each}}
 {{/if}}
 
 {{#if certifications.length}}
-\section*{Certificaciones}
+\section*{ {{{i18n.certifications}}} }
 {{#each certifications}}
 \subsection{ {{{name}}} }
 {{{issuer}}} \hfill {{{date}}}
@@ -95,7 +95,7 @@
 {{/if}}
 
 {{#if technical_skills.length}}
-\section*{Habilidades Técnicas}
+\section*{ {{{i18n.technicalSkills}}} }
 {{#each technical_skills}}
 \subsection{ {{{category}}} }
 {{#each skills}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}
@@ -106,7 +106,7 @@
 \noindent
 \begin{minipage}[t]{0.48\textwidth}
     {{#if soft_skills.length}}
-    \section*{Habilidades Blandas}
+    \section*{ {{{i18n.softSkills}}} }
     \begin{itemize}[leftmargin=1.5em]
         {{#each soft_skills}}
         \item {{{this}}}
@@ -117,7 +117,7 @@
 \hfill
 \begin{minipage}[t]{0.48\textwidth}
     {{#if languages.length}}
-    \section*{Idiomas}
+    \section*{ {{{i18n.languages}}} }
     \begin{itemize}[leftmargin=1.5em]
         {{#each languages}}
         \item {{{language}}}: {{{proficiency}}}
