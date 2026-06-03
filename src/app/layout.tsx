@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'vCreate — ATS-Friendly CV Builder',
+  title: 'vCreate',
   description:
     'Create, edit, and export ATS-optimized CVs in Spanish and English. Download your professional resume as a PDF package.',
   keywords: ['CV builder', 'ATS resume', 'curriculum vitae', 'PDF generator'],

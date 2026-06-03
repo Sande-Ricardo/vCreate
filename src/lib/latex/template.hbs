@@ -1,0 +1,128 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{multicol}
+\titlespacing*{\subsection}
+{0pt}{4pt}{2pt}
+\titleformat{\section}{\Large\bfseries\color{black}}{}{0em}{}
+\titleformat{\subsection}[runin]{\bfseries}{}{0pt}{}[ -- ]
+\pagestyle{empty}
+\begin{document}
+\begin{center}
+    {\Huge \textbf{ {{{personal_data.full_name}}} }} \\
+    \vspace{2mm}
+    \textbf{ {{{personal_data.primary_title}}} } \\
+    \vspace{1mm}
+    {{#if personal_data.email}}
+    \href{mailto:{{{personal_data.email}}} }{ {{{personal_data.email}}} }
+    {{/if}}
+    {{#if personal_data.phone}}
+    \quad | \quad {{{personal_data.phone}}}
+    {{/if}}
+    \\
+    {{#each personal_data.links}}
+    \href{ {{{url}}} }{ {{{platform}}} }
+    {{#unless @last}}\quad | \quad{{/unless}}
+    {{/each}}
+    \\
+    {{{personal_data.location}}}
+\end{center}
+\vspace{5mm}
+
+{{#if professional_profile}}
+\section*{Perfil Profesional}
+{{{professional_profile}}}
+{{/if}}
+
+{{#if work_experience.length}}
+\section*{Experiencia Laboral}
+{{#each work_experience}}
+\subsection{ {{{role}}} }
+{{{start_date}}} -- {{#if is_current}}Presente{{else}}{{{end_date}}}{{/if}}
+\begin{itemize}
+    {{#each responsibilities}}
+    \item {{{this}}}
+    {{/each}}
+\end{itemize}
+{{#if stack.length}}
+\textbf{Stack:} {{#each stack}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}
+{{/if}}
+\vspace{4mm}
+{{/each}}
+{{/if}}
+
+{{#if projects.length}}
+\section*{Proyectos}
+{{#each projects}}
+\subsection{ {{{name}}} }
+{{#if repository_url}} \href{ {{{repository_url}}} }{Repo} {{/if}} {{#if live_demo_url}} | \href{ {{{live_demo_url}}} }{Demo} {{/if}}
+\begin{itemize}
+    {{#if short_description}} \item {{{short_description}}} {{/if}}
+    {{#each responsibilities}}
+    \item {{{this}}}
+    {{/each}}
+\end{itemize}
+{{#if technologies.length}}
+\textbf{Tecnologías:} {{#each technologies}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}
+{{/if}}
+\vspace{4mm}
+{{/each}}
+{{/if}}
+
+{{#if education.length}}
+\section*{Educación}
+{{#each education}}
+\subsection{ {{{degree}}} }
+{{{start_date}}} -- {{#if is_current}}Presente{{else}}{{{end_date}}}{{/if}} \\
+{{{institution}}}
+\vspace{2mm}
+{{/each}}
+{{/if}}
+
+{{#if certifications.length}}
+\section*{Certificaciones}
+{{#each certifications}}
+\subsection{ {{{name}}} }
+{{{issuer}}} \hfill {{{date}}}
+\vspace{2mm}
+{{/each}}
+{{/if}}
+
+{{#if technical_skills.length}}
+\section*{Habilidades Técnicas}
+{{#each technical_skills}}
+\subsection{ {{{category}}} }
+{{#each skills}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}
+{{/each}}
+\vspace{4mm}
+{{/if}}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    {{#if soft_skills.length}}
+    \section*{Habilidades Blandas}
+    \begin{itemize}[leftmargin=1.5em]
+        {{#each soft_skills}}
+        \item {{{this}}}
+        {{/each}}
+    \end{itemize}
+    {{/if}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    {{#if languages.length}}
+    \section*{Idiomas}
+    \begin{itemize}[leftmargin=1.5em]
+        {{#each languages}}
+        \item {{{language}}}: {{{proficiency}}}
+        {{/each}}
+    \end{itemize}
+    {{/if}}
+\end{minipage}
+\end{document}
