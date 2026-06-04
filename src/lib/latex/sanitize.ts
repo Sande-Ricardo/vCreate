@@ -9,6 +9,15 @@ export const latexEscapes: Record<string, string> = {
   '~': '\\textasciitilde{}',
   '^': '\\textasciicircum{}',
   '\\': '\\textbackslash{}',
+  // Common typographic characters that break pdflatex
+  '·': '\\textperiodcentered{}',
+  '—': '---',
+  '–': '--',
+  '“': '``',
+  '”': "\'\'",
+  '‘': '`',
+  '’': "\'",
+  '…': '\\dots{}',
 };
 
 /**
@@ -17,5 +26,5 @@ export const latexEscapes: Record<string, string> = {
 export function sanitizeLatex(text: string | null | undefined): string {
   if (!text) return '';
   // Match any of the special characters and replace using the map
-  return text.replace(/[&%$#_{}~^\\]/g, (match) => latexEscapes[match]);
+  return text.replace(/[&%$#_{}~^\\·—–“”‘’…]/g, (match) => latexEscapes[match]);
 }
