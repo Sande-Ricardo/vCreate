@@ -92,6 +92,13 @@ export async function POST(req: NextRequest) {
 
   } catch (error: any) {
     console.error('Export API Error:', error);
-    return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
+    let errorMessage = error.message || 'Internal Server Error';
+    
+    // Check if the error comes from YtoTech 500 Server Error
+    if (errorMessage.includes('LaTeX compilation failed (500)') || errorMessage.includes('"SERVER_ERROR"')) {
+      errorMessage = 'The third-party PDF compilation service (YtoTech) is currently down or experiencing issues. Please save your draft and try again later.';
+    }
+
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
